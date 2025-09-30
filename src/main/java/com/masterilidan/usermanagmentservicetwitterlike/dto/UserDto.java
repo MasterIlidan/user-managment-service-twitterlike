@@ -1,11 +1,12 @@
 package com.masterilidan.usermanagmentservicetwitterlike.dto;
 
+import com.masterilidan.usermanagmentservicetwitterlike.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,5 +16,5 @@ public class UserDto {
     private long id;
     private String username;
     private String password;
-    private ArrayList<RoleDto> roles;
+    private List<Role> roles;
 }

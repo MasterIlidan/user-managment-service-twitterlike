@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -25,5 +26,5 @@ public class User {
     @NotNull
     private String password;
     @OneToMany
-    private ArrayList<Role> roles;
+    private List<Role> roles;
 }

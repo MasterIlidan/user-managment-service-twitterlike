@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Optional;
+
 @Controller
 public class UserManagement {
     private final UserRepository userRepository;
@@ -21,8 +23,17 @@ public class UserManagement {
 
     @GetMapping("/user{id}")
     public ResponseEntity<UserDto> getUser(@PathVariable long id) {
-        UserDto userDtoOut = new UserDto(id,"hello", null, null);
-        return new ResponseEntity<>(userDtoOut, HttpStatus.OK);
+        Optional<User> byId = userRepository.findById(id);
+        if (byId.isPresent()) {
+            UserDto userDto = new UserDto();
+            userDto.setId(byId.get().getId());
+            userDto.setUsername(byId.get().getUsername());
+            userDto.setRoles(byId.get().getRoles());
+            return new ResponseEntity<>(userDto, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody UserDto userDtoIn) {
@@ -34,7 +45,16 @@ public class UserManagement {
     }
     @PostMapping("/login")
     public ResponseEntity<UserDto> login(@RequestBody UserDto userDtoIn) {
-        return new ResponseEntity<>(userDtoIn, HttpStatus.OK);
+        Optional<User> byUsername = userRepository.findByUsername(userDtoIn.getUsername());
+        if (byUsername.isPresent()) {
+            if (byUsername.get().getPassword().equals(userDtoIn.getPassword())) {
+                return new ResponseEntity<>(userDtoIn, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
 }
