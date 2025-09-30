@@ -1,10 +1,7 @@
 package com.masterilidan.usermanagmentservicetwitterlike.entity;
 
 import jakarta.annotation.Nonnull;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,8 +15,10 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @Getter
 @Setter
+@Table(name = "users_table")
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     private String username;
