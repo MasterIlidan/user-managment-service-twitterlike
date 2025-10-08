@@ -1,6 +1,5 @@
 package com.masterilidan.usermanagmentservicetwitterlike.entity;
 
-import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -8,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,7 +22,10 @@ public class User {
     @NotNull
     private String username;
     @NotNull
+    @Column(unique = true)
+    private String email;
+    @NotNull
     private String password;
-    @OneToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Role> roles;
 }

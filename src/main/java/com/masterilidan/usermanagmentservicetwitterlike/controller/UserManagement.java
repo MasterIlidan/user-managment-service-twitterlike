@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:5173")
+//TODO: разобраться с CORS
+@CrossOrigin(origins = "http://192.168.0.147:5173")
 @Controller
 public class UserManagement {
     private final UserRepository userRepository;
