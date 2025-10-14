@@ -9,10 +9,11 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.masterilidan</groupId>
-    <artifactId>user-managment-service-twitterlike</artifactId>
+    <artifactId>user-management-service-twitterlike</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>user-managment-service-twitterlike</name>
-    <description>user-managment-service-twitterlike</description>
+    <name>user-management-service-twitterlike</name>
+    <description>user-management-service-twitterlike</description>
+    <packaging>jar</packaging>
     <url/>
     <licenses>
         <license/>

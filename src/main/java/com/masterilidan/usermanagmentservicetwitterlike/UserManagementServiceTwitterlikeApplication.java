@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserManagmentServiceTwitterlikeApplication {
+public class UserManagementServiceTwitterlikeApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UserManagmentServiceTwitterlikeApplication.class, args);
+        SpringApplication.run(UserManagementServiceTwitterlikeApplication.class, args);
     }
 
 }
