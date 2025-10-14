@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-management-service-twitterlike
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: user-management-service-twitterlike
+  template:
+    metadata:
+      labels:
+        app: user-management-service-twitterlike
+    spec:
+      containers:
+        - name: user-management-service-twitterlike
+          image: localhost:32000/user-management-service-twitterlike:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
