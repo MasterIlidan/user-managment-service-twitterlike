@@ -5,6 +5,8 @@ import com.masterilidan.usermanagmentservicetwitterlike.entity.Role;
 import com.masterilidan.usermanagmentservicetwitterlike.entity.User;
 import com.masterilidan.usermanagmentservicetwitterlike.repository.RoleRepository;
 import com.masterilidan.usermanagmentservicetwitterlike.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,9 +16,9 @@ import java.util.List;
 import java.util.Optional;
 
 //TODO: разобраться с CORS
-@CrossOrigin(origins = "http://192.168.0.147:5173")
 @Controller
 public class UserManagement {
+    private static final Logger log = LoggerFactory.getLogger(UserManagement.class);
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
@@ -27,14 +29,17 @@ public class UserManagement {
 
     @GetMapping("/user{id}")
     public ResponseEntity<UserDto> getUser(@PathVariable long id) {
+        log.debug("get user {}", id);
         Optional<User> byId = userRepository.findById(id);
         if (byId.isPresent()) {
             UserDto userDto = new UserDto();
             userDto.setId(byId.get().getId());
             userDto.setUsername(byId.get().getUsername());
             userDto.setRoles(byId.get().getRoles());
+            log.debug("get user {}:{}", id, userDto);
             return new ResponseEntity<>(userDto, HttpStatus.OK);
         } else {
+            log.debug("user {} not found", id);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -50,6 +55,7 @@ public class UserManagement {
         }
         user.setUsername(userDtoIn.getUsername());
         user.setPassword(userDtoIn.getPassword());
+        user.setEmail(userDtoIn.getEmail());
         userRepository.save(user);
         return new ResponseEntity<>(userDtoIn, HttpStatus.OK);
     }
